@@ -50,14 +50,16 @@ const marqueeItems = [
   'Staff conversations',
 ];
 const career: Array<[string, string, string, string, boolean?]> = [
-  ['2026—NOW', 'XAI', 'Frontend Specialist Tutor', 'Evaluate senior frontend candidates: React architecture, JavaScript fundamentals, UI systems, performance and production readiness. Calibrate what good looks like across reviewers.'],
-  ['2025', 'BREAKOUT', 'Staff Frontend Engineer', 'Technical owner for an embedded AI agent. Led the admin for non-engineers, and aligned architecture with product and backend on what the agent could do.'],
-  ['2024—2025', 'STEALTH', 'Founding Product / Engineer', 'Sat with founders on discovery for two AI-first concepts — what to build, not only how. Modular React + Vite app for web and a Chrome sidebar.'],
-  ['2023—2024', 'SINGULRAI', 'Founding Frontend Tech Lead', '0→1 analytics frontend. Frontend decision-maker on scope and standards. Dashboards and graph UIs; architecture the team inherited.', true],
-  ['2020—2023', 'SPOTNANA', 'Founding Frontend Tech Lead', 'Bootstrapped the OBT, grew frontend 3→18, mentored, and aligned the platform with product across web and mobile. Tens of thousands of travelers.', true],
-  ['2019—2020', 'PUSHENGAGE', 'Senior Frontend Engineer', 'Led a ~35-page Angular CRM to React + TypeScript. Bundle down ~30%, LCP from ~4.5s to ~2.5s, 1000+ B2B clients on the new stack.'],
-  ['2014—2018', 'OYO · CLEARTAX · FRESHWORKS', 'Founding through SaaS', 'Third engineer at OYO (CRS and first consumer booking). ClearTax SCSS modernization and early ClearSave. Freshworks real-time social and sales UIs.'],
-  ['2011—2014', 'FREELANCE', 'Web development', 'Client work out of Tirupati while finishing VIT and after — custom frontend for whoever would hire a student who could ship.'],
+  ['2026—NOW', 'XAI', 'Frontend Specialist Tutor', 'I calibrate what good senior frontend looks like. Hands-on reviews of senior candidates — React architecture, JavaScript fundamentals, UI systems, performance, production readiness — and I write the feedback other reviewers align to.'],
+  ['2025—2026', 'BREAKOUT', 'Staff Frontend Engineer', 'Technical owner for an embedded AI agent on other people’s sites. Designed a blocks-based system so UI composition stayed separate from product logic, led the admin for non-engineers, and aligned architecture with product and backend on what the agent was allowed to do.'],
+  ['2024—2025', 'STEALTH', 'Founding Product / Engineer', 'Sat with founders on two AI-first concepts under pre-seed experimentation. We prototyped a React + Vite web app, a Chrome sidebar, and an AI-assisted code-transformation UX — enough to decide the constraint. Neither was forced into a company.'],
+  ['2023—2024', 'SINGULRAI', 'Founding Frontend Tech Lead', '0→1 analytics frontend for a dense security graph. Dashboards in React Flow and D3. Testing and lint from day one. I was the frontend decision-maker: what to build, what to cut, and which standards the next hires would inherit.', true],
+  ['2020—2023', 'SPOTNANA', 'Founding Frontend Tech Lead', 'Bootstrapped the online booking tool from a blank repo, shared React / React Native logic, and moved Webpack → Vite + Turborepo. Grew frontend 3→18, mentored, and aligned the platform with product across web and mobile. Tens of thousands of travelers.', true],
+  ['2019—2020', 'PUSHENGAGE', 'Senior Frontend Engineer', 'Led a ~35-page Angular CRM to React + TypeScript. Owned the new React + Node stack for 1,000+ B2B clients. Bundle down ~30%, LCP from ~4.5s to ~2.5s — a migration that kept production up.'],
+  ['2016—2018', 'FRESHWORKS', 'Senior Frontend Engineer', 'Real-time React UIs for social monitoring and engagement, plus internal NLP tagging tools used to train and review models. Sales and social surfaces that had to stay live while the data moved.'],
+  ['2015—2016', 'CLEARTAX', 'Software Engineer, Frontend', 'Refactored a large production UI into maintainable SCSS utilities so the tax surfaces could change without a restyle every quarter. Early ClearSave: a responsive React UI while the product was still finding its shape.'],
+  ['2014—2015', 'OYO ROOMS', 'Founding Frontend Engineer', 'Third engineer. Built the central reservation system from scratch and designed the first consumer booking flow — search, listings, checkout — while the company was still becoming a company.'],
+  ['2011—2014', 'FREELANCE', 'Frontend engineer', 'Client work out of Tirupati while finishing VIT and after. Custom frontend for whoever would hire a student who could ship — the years the craft actually started.'],
 ];
 
 function prefersReducedMotion() {
@@ -435,6 +437,74 @@ function Clock() {
   );
 }
 
+const logoFirst = 'BHAVAN/';
+const logoLast = 'KUCHIBHOTLA';
+
+function TypewriterLogo() {
+  const reduced = typeof window !== 'undefined' && prefersReducedMotion();
+  const [first, setFirst] = useState(reduced ? logoFirst.length : 0);
+  const [last, setLast] = useState(reduced ? logoLast.length : 0);
+  const [phase, setPhase] = useState<'type-first' | 'type-last' | 'delete-last' | 'delete-first'>(
+    'type-first',
+  );
+
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      setFirst(logoFirst.length);
+      setLast(logoLast.length);
+      return;
+    }
+    let delay = 86;
+    if (phase === 'type-first' && first === logoFirst.length) delay = 220;
+    else if (phase === 'type-last' && last === logoLast.length) delay = 1700;
+    else if (phase === 'delete-last' && last === 0) delay = 240;
+    else if (phase === 'delete-last' || phase === 'delete-first') delay = 46;
+
+    const id = window.setTimeout(() => {
+      if (phase === 'type-first') {
+        if (first < logoFirst.length) setFirst((n) => n + 1);
+        else setPhase('type-last');
+        return;
+      }
+      if (phase === 'type-last') {
+        if (last < logoLast.length) setLast((n) => n + 1);
+        else setPhase('delete-last');
+        return;
+      }
+      if (phase === 'delete-last') {
+        if (last > 0) setLast((n) => n - 1);
+        else setPhase('delete-first');
+        return;
+      }
+      if (first > 0) setFirst((n) => n - 1);
+      else setPhase('type-first');
+    }, delay);
+    return () => window.clearTimeout(id);
+  }, [first, last, phase]);
+
+  const firstShown = logoFirst.slice(0, first);
+  const firstBody = firstShown.endsWith('/') ? firstShown.slice(0, -1) : firstShown;
+  const slash = firstShown.endsWith('/');
+  const lastShown = logoLast.slice(0, last);
+  const caretOnLast = phase === 'type-last' || phase === 'delete-last';
+
+  return (
+    <a className="logo" href="#intro" aria-label="Bhavan Kuchibhotla">
+      <span className="logo-stack" aria-hidden="true">
+        <span className="logo-line">
+          {firstBody}
+          {slash && <span className="logo-slash">/</span>}
+          {!caretOnLast && <i className="logo-caret" />}
+        </span>
+        <span className="logo-line logo-last">
+          {lastShown}
+          {caretOnLast && <i className="logo-caret" />}
+        </span>
+      </span>
+    </a>
+  );
+}
+
 function Topbar({
   theme,
   onToggle,
@@ -457,9 +527,7 @@ function Topbar({
 
   return (
     <header className="topbar">
-      <a className="logo" href="#">
-        BHAVAN<span>/</span>
-      </a>
+      <TypewriterLogo />
       <nav className="desk-nav" aria-label="Primary">
         {navLinks.slice(0, 4).map(([href, label]) => (
           <a key={href} href={href} className={active === href ? 'is-active' : ''}>
@@ -469,7 +537,7 @@ function Topbar({
       </nav>
       <div className="topbar-end">
         <a className="availability" href="#contact">
-          <i /> Open to staff conversations <ArrowUpRight size={14} />
+          <i /> Open to conversations now <ArrowUpRight size={14} />
         </a>
         <ThemeToggle theme={theme} onToggle={onToggle} />
         <button
@@ -556,10 +624,11 @@ function App() {
                 <span className="serif">with taste.</span>
               </span>
             </h1>
-            <p className="hero-proof">Founding frontend lead · teams 3→18 · product + platform · web, mobile, extensions</p>
+            <p className="hero-proof">Founding frontend lead · 0→1 twice · teams 3→18 · Bengaluru</p>
             <p>
               I own the frontend system — and the team around it. Architecture, product judgment, and the practices that
-              survive hiring. Taste is how it feels. Leadership is how it lasts.
+              survive hiring. Taste is how it feels. Leadership is how it lasts. Looking for the next staff or founding
+              frontend seat.
             </p>
             <div className="hero-links">
               <MagneticLink className="solid" href="#work">
@@ -606,8 +675,8 @@ function App() {
               <i>make real.</i>
             </h2>
             <p data-reveal data-delay="2">
-              Two founding-lead engagements. I owned the frontend system, led the people on it, and sat with product on
-              what was worth building.
+              Two founding-lead cases in full — Spotnana and SingulrAI. I owned the frontend system, led the people on
+              it, and sat with product on what was worth building. The cards below are the path that made those possible.
             </p>
           </div>
 
@@ -729,24 +798,74 @@ function App() {
             </div>
           </article>
 
+          <figure className="quote" data-reveal>
+            <blockquote>
+              Bhavan joined Singulr AI as founding front end engineer and worked single handedly to develop the
+              foundations of UI from grounds up. He thrives in a fast paced startup environment and delivers features at
+              speed of light. He doesn&apos;t compromise on quality and scale even under high pressure environment to
+              keep the backlog under control. He did initial hiring and ramped up the team to lay the right foundation of
+              the product. It was a pleasure working with him.
+            </blockquote>
+            <figcaption>
+              <b>Rohit Reja</b>
+              <span>Co-Founder, Vyomex Labs · colleague at Spotnana and SingulrAI</span>
+            </figcaption>
+          </figure>
+
           <div className="small-grid">
             <article data-reveal>
               <div className="mini-num">03</div>
               <h3>An agent, inside other people’s sites</h3>
               <p>
-                Staff frontend for an embedded AI agent. Led the admin so non-engineers could configure deployments, and
-                sat with product and backend on what the agent was allowed to do — not only how it rendered.
+                Staff frontend for an embedded AI agent. Blocks-based composition, an admin for non-engineers, and the
+                product call on what the agent was allowed to do — not only how it rendered.
               </p>
               <span className="ghost">BREAKOUT · 2025</span>
             </article>
-            <article data-reveal data-delay="2">
+            <article data-reveal data-delay="1">
               <div className="mini-num">04</div>
+              <h3>A CRM, moved without a rewrite-for-purity</h3>
+              <p>
+                Led a ~35-page Angular CRM to React + TypeScript. Bundle down ~30%, LCP from ~4.5s to ~2.5s. A thousand
+                B2B clients landed on the new stack with production still up.
+              </p>
+              <span className="ghost">PUSHENGAGE · 2019</span>
+            </article>
+            <article data-reveal>
+              <div className="mini-num">05</div>
+              <h3>Live social and sales surfaces</h3>
+              <p>
+                Real-time React UIs for social monitoring and engagement at Freshworks, plus internal NLP tagging tools
+                used to train and review models.
+              </p>
+              <span className="ghost">FRESHWORKS · 2016</span>
+            </article>
+            <article data-reveal data-delay="1">
+              <div className="mini-num">06</div>
+              <h3>Styles that could survive a tax season</h3>
+              <p>
+                Refactored a large ClearTax UI into SCSS utilities, then built the early ClearSave React surface while
+                the product was still finding its shape.
+              </p>
+              <span className="ghost">CLEARTAX · 2015</span>
+            </article>
+            <article data-reveal>
+              <div className="mini-num">07</div>
               <h3>From the early days</h3>
               <p>
                 Third engineer at OYO. Built the central reservation system and the first consumer booking flow — search,
                 listings, checkout — while the company was still becoming a company.
               </p>
               <span className="ghost">OYO ROOMS · 2014</span>
+            </article>
+            <article data-reveal data-delay="1">
+              <div className="mini-num">08</div>
+              <h3>Whoever would hire a student who could ship</h3>
+              <p>
+                Client frontend out of Tirupati through the last year at VIT and after. Custom work until a company
+                hired the same person full-time.
+              </p>
+              <span className="ghost">FREELANCE · 2011</span>
             </article>
           </div>
         </section>
@@ -863,7 +982,7 @@ function App() {
                   <h3>{row[2]}</h3>
                   <p>{row[3]}</p>
                 </div>
-                <span className="row-no">0{i + 1}</span>
+                <span className="row-no">{String(i + 1).padStart(2, '0')}</span>
               </div>
             ))}
           </div>
@@ -874,7 +993,7 @@ function App() {
               <h3>B.E. Information Technology</h3>
               <p>VIT University, Vellore. The computer-science foundation. Freelance started in the last year; full-time started in 2014.</p>
             </div>
-            <span className="row-no">09</span>
+            <span className="row-no">11</span>
           </div>
         </section>
 
@@ -943,9 +1062,10 @@ function App() {
               <i>problem?</i>
             </h2>
             <p className="contact-lead" data-reveal data-delay="1">
-              Bengaluru. Open to staff frontend, tech-lead, and founding roles — platform, team, and product included.
+              Bengaluru. In-office, hybrid, or remote. Actively open to staff or founding frontend-lead conversations.
+              Subject line: staff / founding frontend.
             </p>
-            <MagneticLink className="email" href="mailto:bhavanvitu@gmail.com">
+            <MagneticLink className="email" href="mailto:bhavanvitu@gmail.com?subject=Staff%20/%20founding%20frontend">
               bhavanvitu@gmail.com <ArrowUpRight />
             </MagneticLink>
             <div className="social" data-reveal>
