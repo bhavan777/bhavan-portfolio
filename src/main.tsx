@@ -22,6 +22,55 @@ type Theme = 'dark' | 'light';
 const spotnanaImg = 'https://www.spotnana.com/wp-content/uploads/2025/05/openplatform-3-content-1024x580.jpg';
 const singulrImg = 'https://cdn.prod.website-files.com/68c7c6fc5d08d3aa30556cf2/68c81f71e0835062c5696090_control%20pane%20-main-img.webp';
 const resumeHref = '/Bhavan_Kuchibhotla_Resume.pdf';
+
+const productReferences = [
+  {
+    company: 'PUSHENGAGE',
+    period: '2019—2020',
+    title: 'Dashboard migration',
+    description: 'A ~35-page Angular CRM moved to React + TypeScript, with the production product staying live through the migration.',
+    tags: ['React', 'TypeScript', 'Angular → React'],
+    href: 'https://www.pushengage.com/new-dashboard-announcement/',
+    linkLabel: 'Public product reference',
+  },
+  {
+    company: 'FRESHDESK',
+    period: '2016—2018',
+    title: 'Social + support surfaces',
+    description: 'Real-time React interfaces for social monitoring and engagement, alongside the Freshdesk Mint-era product evolution.',
+    tags: ['React', 'Redux', 'Social'],
+    href: 'https://www.freshworks.com/freshdesk/new-features/',
+    linkLabel: '2017 product archive',
+  },
+  {
+    company: 'OYO ROOMS',
+    period: '2014—2015',
+    title: 'Booking from the early days',
+    description: 'The early consumer booking experience: search, listings and checkout, built while OYO was still scaling its first product surfaces.',
+    tags: ['Booking', 'Web', 'Mobile'],
+    href: 'https://www.oyorooms.com/about/index.html',
+    linkLabel: 'Company timeline',
+  },
+  {
+    company: 'CLEARTAX',
+    period: '2015—2016',
+    title: 'ClearSave',
+    description: 'Early responsive React UI and a production styling refactor that made the product easier to evolve.',
+    tags: ['React', 'SCSS', 'Responsive UI'],
+    href: null,
+    linkLabel: null,
+  },
+  {
+    company: 'BREAKOUT',
+    period: '2025—2026',
+    title: 'Embedded AI agent',
+    description: 'A blocks-based embedded UI system and admin surface for configuring AI agents across customer websites.',
+    tags: ['AI', 'Embedded UI', 'Blocks'],
+    href: null,
+    linkLabel: null,
+  },
+];
+
 const portraits = [
   {src: portrait1, alt: 'Bhavan Kuchibhotla, looking aside'},
   {src: portrait2, alt: 'Bhavan Kuchibhotla, portrait'},
@@ -675,8 +724,7 @@ function App() {
               <i>make real.</i>
             </h2>
             <p data-reveal data-delay="2">
-              Two founding-lead cases in full — Spotnana and SingulrAI. I owned the frontend system, led the people on
-              it, and sat with product on what was worth building. The cards below are the path that made those possible.
+              Two founding-lead cases in full — Spotnana and SingulrAI — plus a visual archive of the other products I helped ship.
             </p>
           </div>
 
@@ -811,6 +859,37 @@ function App() {
               <span>Co-Founder, Vyomex Labs · colleague at Spotnana and SingulrAI</span>
             </figcaption>
           </figure>
+
+          <section className="product-archive" aria-labelledby="product-archive-title" data-reveal>
+            <div className="archive-head">
+              <div>
+                <div className="archive-kicker">PRODUCT ARCHIVE</div>
+                <h3 id="product-archive-title">The screens behind the résumé.</h3>
+              </div>
+              <p>Public references where available; private work is represented with contribution-first descriptions. Historical screenshots can be added here as they are sanitized and verified.</p>
+            </div>
+            <div className="archive-grid">
+              {productReferences.map((product, index) => (
+                <article className="archive-card" key={product.company}>
+                  <div className="archive-top">
+                    <span>{String(index + 3).padStart(2, '0')}</span>
+                    <small>{product.period}</small>
+                  </div>
+                  <div className="archive-company">{product.company}</div>
+                  <h4>{product.title}</h4>
+                  <p>{product.description}</p>
+                  <div className="archive-tags">
+                    {product.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                  </div>
+                  {product.href ? (
+                    <a href={product.href} target="_blank" rel="noreferrer">{product.linkLabel} <MoveUpRight size={14} /></a>
+                  ) : (
+                    <span className="archive-private">Private / portfolio evidence</span>
+                  )}
+                </article>
+              ))}
+            </div>
+          </section>
 
           <div className="small-grid">
             <article data-reveal>
