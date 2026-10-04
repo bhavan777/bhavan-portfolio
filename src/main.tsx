@@ -30,6 +30,9 @@ const productReferences = [
     title: 'Dashboard migration',
     description: 'A ~35-page Angular CRM moved to React + TypeScript, with the production product staying live through the migration.',
     tags: ['React', 'TypeScript', 'Angular → React'],
+    image: 'https://cdn.shopify.com/app-store/listing_images/6a822b1cc293113011ba9ca9321ccb69/desktop_screenshot/CKjg9NL0lu8CEAE%3D.jpg?height=900&quality=90&width=1600',
+    imageAlt: 'PushEngage dashboard with notification and subscriber analytics',
+    imageCaption: 'PUSHENGAGE · PUBLIC PRODUCT SCREEN · 2018',
     href: 'https://www.pushengage.com/new-dashboard-announcement/',
     linkLabel: 'Public product reference',
   },
@@ -39,6 +42,9 @@ const productReferences = [
     title: 'Social + support surfaces',
     description: 'Real-time React interfaces for social monitoring and engagement, alongside the Freshdesk Mint-era product evolution.',
     tags: ['React', 'Redux', 'Social'],
+    image: 'https://website-assets-fd.freshworks.com/attachments/ckw336mu100y4c6g0b5ei83c7-freshdesk-dashboard.one-half.png',
+    imageAlt: 'Freshdesk support dashboard with ticket, chat and customer satisfaction metrics',
+    imageCaption: 'FRESHDESK · MINT-ERA DASHBOARD · PUBLIC REFERENCE',
     href: 'https://www.freshworks.com/freshdesk/new-features/',
     linkLabel: '2017 product archive',
   },
@@ -48,8 +54,11 @@ const productReferences = [
     title: 'Booking from the early days',
     description: 'The early consumer booking experience: search, listings and checkout, built while OYO was still scaling its first product surfaces.',
     tags: ['Booking', 'Web', 'Mobile'],
-    href: 'https://www.oyorooms.com/about/index.html',
-    linkLabel: 'Company timeline',
+    image: 'https://m.economictimes.com/thumb/msid-54479002%2Cwidth-1600%2Cheight-900%2Cresizemode-4%2Cimgsize-257587/oyo-makes-room-to-check-in-at-6am.jpg',
+    imageAlt: 'OYO Rooms early booking website with city navigation and hotel search',
+    imageCaption: 'OYO ROOMS · EARLY BOOKING UI · PUBLIC REFERENCE',
+    href: 'https://m.economictimes.com/small-biz/startups/oyo-makes-room-to-check-in-at-6am/articleshow/54479002.cms',
+    linkLabel: 'Historical product reference',
   },
   {
     company: 'CLEARTAX',
@@ -57,8 +66,11 @@ const productReferences = [
     title: 'ClearSave',
     description: 'Early responsive React UI and a production styling refactor that made the product easier to evolve.',
     tags: ['React', 'SCSS', 'Responsive UI'],
-    href: null,
-    linkLabel: null,
+    image: 'https://assets1.cleartax-cdn.com/s/img/2018/03/27154542/CT-2.jpg',
+    imageAlt: 'ClearTax Save investment portfolio interface',
+    imageCaption: 'CLEARTAX SAVE · PUBLIC PRODUCT SCREEN',
+    href: 'https://cleartax.in/s/mutual-fund-redemption',
+    linkLabel: 'Public product reference',
   },
   {
     company: 'BREAKOUT',
@@ -66,8 +78,11 @@ const productReferences = [
     title: 'Embedded AI agent',
     description: 'A blocks-based embedded UI system and admin surface for configuring AI agents across customer websites.',
     tags: ['AI', 'Embedded UI', 'Blocks'],
-    href: null,
-    linkLabel: null,
+    image: 'https://images.g2crowd.com/uploads/attachment/file/1444556/Screenshot-2025-03-06-at-9.56.46-AM.png',
+    imageAlt: 'Breakout AI agent chat interface embedded on a website',
+    imageCaption: 'BREAKOUT · AI AGENT UI · PUBLIC REFERENCE',
+    href: 'https://www.g2.com/products/breakout-2025-03-16/reviews',
+    linkLabel: 'Public product reference',
   },
 ];
 
@@ -866,26 +881,32 @@ function App() {
                 <div className="archive-kicker">PRODUCT ARCHIVE</div>
                 <h3 id="product-archive-title">The screens behind the résumé.</h3>
               </div>
-              <p>Public references where available; private work is represented with contribution-first descriptions. Historical screenshots can be added here as they are sanitized and verified.</p>
+              <p>Public product screens from the companies I built with, paired with the part I owned. Historical references are labeled as public screens; the contribution story is mine.</p>
             </div>
             <div className="archive-grid">
               {productReferences.map((product, index) => (
-                <article className="archive-card" key={product.company}>
-                  <div className="archive-top">
-                    <span>{String(index + 3).padStart(2, '0')}</span>
-                    <small>{product.period}</small>
+                <article className="archive-card" key={product.company} data-reveal>
+                  <a className="archive-media" href={product.href || undefined} target="_blank" rel="noreferrer" aria-label={product.href ? `Open ${product.company} public product reference` : undefined}>
+                    <img src={product.image} alt={product.imageAlt} loading="lazy" />
+                    <span>{product.imageCaption}</span>
+                  </a>
+                  <div className="archive-body">
+                    <div className="archive-top">
+                      <span>{String(index + 3).padStart(2, '0')}</span>
+                      <small>{product.period}</small>
+                    </div>
+                    <div className="archive-company">{product.company}</div>
+                    <h4>{product.title}</h4>
+                    <p>{product.description}</p>
+                    <div className="archive-tags">
+                      {product.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                    </div>
+                    {product.href ? (
+                      <a href={product.href} target="_blank" rel="noreferrer">{product.linkLabel} <MoveUpRight size={14} /></a>
+                    ) : (
+                      <span className="archive-private">Private / portfolio evidence</span>
+                    )}
                   </div>
-                  <div className="archive-company">{product.company}</div>
-                  <h4>{product.title}</h4>
-                  <p>{product.description}</p>
-                  <div className="archive-tags">
-                    {product.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                  </div>
-                  {product.href ? (
-                    <a href={product.href} target="_blank" rel="noreferrer">{product.linkLabel} <MoveUpRight size={14} /></a>
-                  ) : (
-                    <span className="archive-private">Private / portfolio evidence</span>
-                  )}
                 </article>
               ))}
             </div>
