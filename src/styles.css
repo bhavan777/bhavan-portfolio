@@ -2075,3 +2075,14 @@
 @media(prefers-reduced-motion:reduce){
   .image-lightbox{animation:none}
 }
+
+
+/* Keep the custom cursor above the lightbox and its image */
+.has-cursor .cursor-dot,
+.has-cursor .cursor-ring{z-index:1105;pointer-events:none}
+.has-cursor .spotlight{z-index:1099;pointer-events:none}
+.image-lightbox{z-index:1000;isolation:isolate}
+.image-lightbox .lightbox-content,
+.image-lightbox .lightbox-content img,
+.image-lightbox .lightbox-footer{position:relative;z-index:1000}
+.image-lightbox .lightbox-close{z-index:1002}
