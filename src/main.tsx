@@ -19,6 +19,8 @@ import portrait3 from './assets/portraits/03.jpg';
 
 type Theme = 'dark' | 'light';
 
+const resumeHref = '/Bhavan_Kuchibhotla_Resume.pdf';
+
 type CarouselImage = [string, string];
 
 const breakoutImages: CarouselImage[] = [
