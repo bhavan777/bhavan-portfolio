@@ -19,71 +19,52 @@ import portrait3 from './assets/portraits/03.jpg';
 
 type Theme = 'dark' | 'light';
 
-const spotnanaImg = 'https://www.spotnana.com/wp-content/uploads/2025/05/openplatform-3-content-1024x580.jpg';
-const singulrImg = 'https://cdn.prod.website-files.com/68c7c6fc5d08d3aa30556cf2/68c81f71e0835062c5696090_control%20pane%20-main-img.webp';
-const resumeHref = '/Bhavan_Kuchibhotla_Resume.pdf';
+type CarouselImage = [string, string];
 
-const productReferences = [
-  {
-    company: 'PUSHENGAGE',
-    period: '2019—2020',
-    title: 'Dashboard migration',
-    description: 'A ~35-page Angular CRM moved to React + TypeScript, with the production product staying live through the migration.',
-    tags: ['React', 'TypeScript', 'Angular → React'],
-    image: 'https://cdn.shopify.com/app-store/listing_images/6a822b1cc293113011ba9ca9321ccb69/desktop_screenshot/CKjg9NL0lu8CEAE%3D.jpg?height=900&quality=90&width=1600',
-    imageAlt: 'PushEngage dashboard with notification and subscriber analytics',
-    imageCaption: 'PUSHENGAGE · PUBLIC PRODUCT SCREEN · 2018',
-    href: 'https://www.pushengage.com/new-dashboard-announcement/',
-    linkLabel: 'Public product reference',
-  },
-  {
-    company: 'FRESHDESK',
-    period: '2016—2018',
-    title: 'Social + support surfaces',
-    description: 'Real-time React interfaces for social monitoring and engagement, alongside the Freshdesk Mint-era product evolution.',
-    tags: ['React', 'Redux', 'Social'],
-    image: 'https://website-assets-fd.freshworks.com/attachments/ckw336mu100y4c6g0b5ei83c7-freshdesk-dashboard.one-half.png',
-    imageAlt: 'Freshdesk support dashboard with ticket, chat and customer satisfaction metrics',
-    imageCaption: 'FRESHDESK · MINT-ERA DASHBOARD · PUBLIC REFERENCE',
-    href: 'https://www.freshworks.com/freshdesk/new-features/',
-    linkLabel: '2017 product archive',
-  },
-  {
-    company: 'OYO ROOMS',
-    period: '2014—2015',
-    title: 'Booking from the early days',
-    description: 'The early consumer booking experience: search, listings and checkout, built while OYO was still scaling its first product surfaces.',
-    tags: ['Booking', 'Web', 'Mobile'],
-    image: 'https://m.economictimes.com/thumb/msid-54479002%2Cwidth-1600%2Cheight-900%2Cresizemode-4%2Cimgsize-257587/oyo-makes-room-to-check-in-at-6am.jpg',
-    imageAlt: 'OYO Rooms early booking website with city navigation and hotel search',
-    imageCaption: 'OYO ROOMS · EARLY BOOKING UI · PUBLIC REFERENCE',
-    href: 'https://m.economictimes.com/small-biz/startups/oyo-makes-room-to-check-in-at-6am/articleshow/54479002.cms',
-    linkLabel: 'Historical product reference',
-  },
-  {
-    company: 'CLEARTAX',
-    period: '2015—2016',
-    title: 'ClearSave',
-    description: 'Early responsive React UI and a production styling refactor that made the product easier to evolve.',
-    tags: ['React', 'SCSS', 'Responsive UI'],
-    image: 'https://assets1.cleartax-cdn.com/s/img/2018/03/27154542/CT-2.jpg',
-    imageAlt: 'ClearTax Save investment portfolio interface',
-    imageCaption: 'CLEARTAX SAVE · PUBLIC PRODUCT SCREEN',
-    href: 'https://cleartax.in/s/mutual-fund-redemption',
-    linkLabel: 'Public product reference',
-  },
-  {
-    company: 'BREAKOUT',
-    period: '2025—2026',
-    title: 'Embedded AI agent',
-    description: 'A blocks-based embedded UI system and admin surface for configuring AI agents across customer websites.',
-    tags: ['AI', 'Embedded UI', 'Blocks'],
-    image: 'https://images.g2crowd.com/uploads/attachment/file/1444556/Screenshot-2025-03-06-at-9.56.46-AM.png',
-    imageAlt: 'Breakout AI agent chat interface embedded on a website',
-    imageCaption: 'BREAKOUT · AI AGENT UI · PUBLIC REFERENCE',
-    href: 'https://www.g2.com/products/breakout-2025-03-16/reviews',
-    linkLabel: 'Public product reference',
-  },
+const breakoutImages: CarouselImage[] = [
+  ['https://framerusercontent.com/images/d1Khod74DD56uxovoPgGBqrYk.png', 'Breakout AI live engagement notification'],
+  ['https://framerusercontent.com/images/2hx4uPJsd99EqoogMI5cIHJzr8.png', 'Breakout customer engagement interface'],
+];
+const singulrImages: CarouselImage[] = [
+  ['https://cdn.prod.website-files.com/68c7c6fc5d08d3aa30556cf2/68c81f71e0835062c5696090_control%20pane%20-main-img.webp', 'SingulrAI control plane dashboard'],
+  ['https://cdn.prod.website-files.com/68c7c6fc5d08d3aa30556cf2/69522cecd23063deb5c7e09e_Group%2095.webp', 'SingulrAI product screen'],
+  ['https://cdn.prod.website-files.com/68c7c6fc5d08d3aa30556cf2/69522cec994da8e11b78c075_Group%20204.webp', 'SingulrAI product interface'],
+];
+const spotnanaImages: CarouselImage[] = [
+  ['https://www.spotnana.com/wp-content/uploads/2025/05/openplatform-3-content-1024x580.jpg', 'Spotnana open platform booking interface'],
+  ['https://spotnana.com/wp-content/uploads/2022/07/1_VXB609OqmoeSJlsOLMrrrw.png', 'Spotnana travel booking product screen'],
+  ['https://www.spotnana.com/wp-content/smush-webp/2024/07/Blog-Screen-Multibooking-1024x679.png.webp', 'Spotnana multi-passenger booking screen'],
+  ['https://www.spotnana.com/wp-content/smush-webp/2024/12/blog_screen_ryanair-1024x533.png.webp', 'Spotnana airline booking screen'],
+];
+const pushengageImages: CarouselImage[] = [
+  ['https://cdn.shopify.com/app-store/listing_images/6a822b1cc293113011ba9ca9321ccb69/desktop_screenshot/CKjg9NL0lu8CEAE%3D.jpg?height=900&quality=90&width=1600', 'PushEngage dashboard'],
+  ['https://www.pushengage.com/wp-content/uploads/2022/01/PushEngage-Dashboard-1400x585.png', 'PushEngage dashboard overview'],
+  ['https://www.pushengage.com/wp-content/uploads/2022/01/Analytics-Overview.png', 'PushEngage analytics overview'],
+  ['https://www.pushengage.com/wp-content/uploads/2022/01/Opt-in-analytics.png', 'PushEngage opt-in analytics'],
+];
+const freshdeskImages: CarouselImage[] = [
+  ['https://website-assets-fd.freshworks.com/attachments/cjiu71m7q001bz6fz4wb9pxws-ticket-list.full.png', 'Freshdesk ticket list'],
+];
+const cleartaxImages: CarouselImage[] = [
+  ['https://assets1.cleartax-cdn.com/s/img/2018/03/27154542/CT-2.jpg', 'ClearTax ClearSave product screen'],
+];
+const oyoImages: CarouselImage[] = [
+  ['https://m.economictimes.com/thumb/msid-54479002%2Cwidth-1600%2Cheight-900%2Cresizemode-4%2Cimgsize-257587/oyo-makes-room-to-check-in-at-6am.jpg', 'OYO Rooms early booking experience'],
+  ['https://www.tnhglobal.com/wp-content/uploads/2015/08/Book-OYO-ROOM-in-3-taps-NXPowerLite-1900x700_c.jpg', 'OYO Rooms mobile booking flow'],
+  ['https://miro.medium.com/v2/resize%3Afit%3A1200/1%2AAngEdf8_4bIrHTiojw0y9w.jpeg', 'OYO Rooms booking product screen'],
+];
+
+const careerProjects = [
+  {period:'2026—NOW', company:'XAI', role:'Frontend Specialist Tutor', title:'Calibrating senior frontend engineering', description:'I calibrate what good senior frontend looks like. Hands-on reviews of senior candidates — React architecture, JavaScript fundamentals, UI systems, performance, production readiness — and I write the feedback other reviewers align to.', tags:['React','JavaScript','Frontend Architecture','Technical Evaluation'], images:[] as CarouselImage[]},
+  {period:'2025—2026', company:'BREAKOUT', role:'Staff Frontend Engineer', title:'Embedded AI agent', description:'Technical owner for an embedded AI agent on other people’s sites. Designed a blocks-based system so UI composition stayed separate from product logic, led the admin for non-engineers, and aligned architecture with product and backend on what the agent was allowed to do.', tags:['React','TypeScript','AI','Embedded UI','Blocks'], images:breakoutImages},
+  {period:'2024—2025', company:'STEALTH', role:'Founding Product / Engineer', title:'Two AI-first product concepts', description:'Sat with founders on two AI-first concepts under pre-seed experimentation. We prototyped a React + Vite web app, a Chrome sidebar, and an AI-assisted code-transformation UX — enough to decide the constraint. Neither was forced into a company.', tags:['React','Vite','Chrome Extension','AI UX'], images:[] as CarouselImage[]},
+  {period:'2023—2024', company:'SINGULRAI', role:'Founding Frontend Tech Lead', title:'Dense systems, made readable', description:'0→1 analytics frontend for a dense security graph. Dashboards in React Flow and D3. I was the frontend decision-maker: what to build, what to cut, and which standards the next hires would inherit.', tags:['React','TypeScript','React Flow','D3'], images:singulrImages},
+  {period:'2020—2023', company:'SPOTNANA', role:'Founding Frontend Tech Lead', title:'Travel, at enterprise scale', description:'Bootstrapped the online booking tool from a blank repo, shared React / React Native logic, and moved Webpack → Vite + Turborepo. Grew frontend 3→18, mentored, and aligned the platform with product across web and mobile.', tags:['React','React Native','TypeScript','Vite','Turborepo'], images:spotnanaImages},
+  {period:'2019—2020', company:'PUSHENGAGE', role:'Senior Frontend Engineer', title:'Dashboard migration', description:'Led a ~35-page Angular CRM to React + TypeScript. Owned the new React + Node stack for 1,000+ B2B clients. Bundle down ~30%, LCP from ~4.5s to ~2.5s — a migration that kept production up.', tags:['React','TypeScript','Angular → React','Node.js'], images:pushengageImages},
+  {period:'2016—2018', company:'FRESHWORKS', role:'Senior Frontend Engineer', title:'Real-time product surfaces', description:'Real-time React UIs for social monitoring and engagement, plus internal NLP tagging tools used to train and review models. Sales and social surfaces that had to stay live while the data moved.', tags:['React','Redux','Real-time UI','NLP'], images:freshdeskImages},
+  {period:'2015—2016', company:'CLEARTAX', role:'Software Engineer, Frontend', title:'ClearSave', description:'Refactored a large production UI into maintainable SCSS utilities so the tax surfaces could change without a restyle every quarter. Early ClearSave: a responsive React UI while the product was still finding its shape.', tags:['React','SCSS','Responsive UI'], images:cleartaxImages},
+  {period:'2014—2015', company:'OYO ROOMS', role:'Founding Frontend Engineer', title:'Booking from the early days', description:'Third engineer. Built the central reservation system from scratch and designed the first consumer booking flow — search, listings, checkout — while the company was still becoming a company.', tags:['Booking','Web','Mobile','JavaScript'], images:oyoImages},
+  {period:'2011—2014', company:'FREELANCE', role:'Frontend Engineer', title:'Where the craft started', description:'Client work out of Tirupati while finishing VIT and after. Custom frontend for whoever would hire a student who could ship — the years the craft actually started.', tags:['Frontend','JavaScript','Web'], images:[] as CarouselImage[]},
 ];
 
 const portraits = [
@@ -447,29 +428,48 @@ function PortraitCarousel() {
   );
 }
 
-function TiltFigure({src, alt, caption}: {src: string; alt: string; caption: string}) {
-  const ref = useRef<HTMLDivElement>(null);
 
-  const move = (event: React.PointerEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el || isCoarsePointer() || prefersReducedMotion()) return;
-    const box = el.getBoundingClientRect();
-    const px = (event.clientX - box.left) / box.width - 0.5;
-    const py = (event.clientY - box.top) / box.height - 0.5;
-    el.style.transform = `perspective(1200px) rotateX(${-py * 4}deg) rotateY(${px * 5}deg)`;
-  };
+function ImageCarousel({images}: {images: CarouselImage[]}) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
+  useEffect(() => {
+    if (images.length < 2 || paused || prefersReducedMotion()) return;
+    const id = window.setInterval(() => setActive((current) => (current + 1) % images.length), 4500);
+    return () => window.clearInterval(id);
+  }, [images.length, paused]);
+
+  if (!images.length) {
+    return (
+      <div className="timeline-text-panel">
+        <span>TEXT-ONLY CASE STUDY</span>
+        <strong>Private / no public product screen</strong>
+        <p>Contribution details are shown without exposing confidential or unverifiable product imagery.</p>
+      </div>
+    );
+  }
+
+  const [src, alt] = images[active];
   return (
-    <div
-      ref={ref}
-      className="feature-image"
-      onPointerMove={move}
-      onPointerLeave={() => {
-        if (ref.current) ref.current.style.transform = '';
-      }}
-    >
-      <img src={src} alt={alt} />
-      <span>{caption}</span>
+    <div className="image-carousel" role="region" aria-roledescription="carousel" aria-label={alt}
+      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+      <img src={src} alt={alt} loading="lazy"
+        onError={() => setActive((current) => images.length > 1 ? (current + 1) % images.length : current)} />
+      {images.length > 1 && (
+        <div className="carousel-controls">
+          <button type="button" onClick={() => setActive((current) => (current - 1 + images.length) % images.length)} aria-label="Previous image">←</button>
+          <div className="carousel-dots" role="tablist" aria-label="Choose image">
+            {images.map(([, label], index) => (
+              <button key={label} type="button" role="tab" aria-selected={index === active}
+                aria-label={`Show image ${index + 1}: ${label}`} className={index === active ? 'is-active' : ''}
+                onClick={() => setActive(index)} />
+            ))}
+          </div>
+          <button type="button" onClick={() => setActive((current) => (current + 1) % images.length)} aria-label="Next image">→</button>
+        </div>
+      )}
+      <span className="carousel-caption">{alt}</span>
     </div>
   );
 }
@@ -730,7 +730,7 @@ function App() {
       <main>
         <section id="work" className="work">
           <div className="section-label" data-reveal>
-            <span>02</span> SELECTED WORK
+            <span>02</span> WORK / CASE STUDIES
           </div>
           <div className="work-intro">
             <h2 data-reveal>
@@ -739,234 +739,36 @@ function App() {
               <i>make real.</i>
             </h2>
             <p data-reveal data-delay="2">
-              Two founding-lead cases in full — Spotnana and SingulrAI — plus a visual archive of the other products I helped ship.
+              One timeline, latest to oldest. Each chapter shows what I owned, the systems I worked in, and public product screens where a safe reference exists.
             </p>
           </div>
 
-          <article className="feature" data-reveal>
-            <TiltFigure src={spotnanaImg} alt="Spotnana booking interface" caption="SPOTNANA · ONLINE BOOKING TOOL" />
-            <div className="feature-info">
-              <div className="number">01</div>
-              <div className="feature-role">FOUNDING FRONTEND TECH LEAD · 2020—2023</div>
-              <h3>Travel, at enterprise scale.</h3>
-              <p>
-                Spotnana needed one booking surface for flights, hotels and cars — on web and mobile — from a blank repo. I
-                bootstrapped the frontend, hired and mentored the team, and stayed close to product until a larger group
-                could own it.
-              </p>
-              <div className="case-beats">
-                <div>
-                  <small>Problem</small>
-                  <p>
-                    Enterprise travel UIs were stitched together. There was no shared platform, no component system, and no
-                    path from a three-person frontend to a multi-surface product.
-                  </p>
+          <div className="career-timeline">
+            {careerProjects.map((project, index) => (
+              <article className={`timeline-item ${index % 2 ? 'is-right' : 'is-left'}`} key={project.company} data-reveal>
+                <div className="timeline-node" aria-hidden="true">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
                 </div>
-                <div>
-                  <small>System</small>
-                  <p>
-                    Shared React / React Native logic, a design system, Webpack → Vite + Turborepo, CI/CD. Coding
-                    standards, reviews, and mentoring so the architecture survived hiring — not just the first three
-                    people.
-                  </p>
-                </div>
-                <div>
-                  <small>Outcome</small>
-                  <p>
-                    Mission-critical booking used daily by tens of thousands of travelers. Duplication across web and
-                    mobile dropped ~40%. I grew the frontend group from 3 to 18 and aligned it with product across
-                    surfaces.
-                  </p>
-                </div>
-              </div>
-              <div className="stats">
-                <div>
-                  <b>20–40K+</b>
-                  <span>travelers</span>
-                </div>
-                <div>
-                  <b>3 → 18</b>
-                  <span>frontend team</span>
-                </div>
-                <div>
-                  <b>~40%</b>
-                  <span>less duplication</span>
-                </div>
-              </div>
-              <div className="pill-row">
-                <span>React</span>
-                <span>React Native</span>
-                <span>TypeScript</span>
-                <span>Vite / Turborepo</span>
-              </div>
-              <a href="https://www.spotnana.com/open-platform/" target="_blank" rel="noreferrer">
-                View the product <MoveUpRight size={15} />
-              </a>
-            </div>
-          </article>
-
-          <article className="feature reverse" data-reveal>
-            <TiltFigure src={singulrImg} alt="SingulrAI control plane dashboard" caption="SINGULRAI · AI CONTROL PLANE" />
-            <div className="feature-info">
-              <div className="number">02</div>
-              <div className="feature-role">FOUNDING FRONTEND TECH LEAD · 2023—2024</div>
-              <h3>Dense systems, made readable.</h3>
-              <p>
-                SingulrAI’s product is a graph: services, agents, risk. The frontend had to stay inspectable as that graph
-                got denser — and someone had to set the product and engineering bar before there was a team to inherit it.
-              </p>
-              <div className="case-beats">
-                <div>
-                  <small>Problem</small>
-                  <p>
-                    Security and observability data is hostile to UI. Dashboards rot into noise, and graph views collapse
-                    once you have thousands of nodes and edges.
-                  </p>
-                </div>
-                <div>
-                  <small>System</small>
-                  <p>
-                    0→1 frontend with React Flow and D3. Testing and lint from day one. I was the frontend decision-maker:
-                    what to build, what to cut, and which standards the next hires would inherit.
-                  </p>
-                </div>
-                <div>
-                  <small>Outcome</small>
-                  <p>Rendering improved ~30%. Practices and architecture became the default as I grew the frontend group from founding.</p>
-                </div>
-              </div>
-              <div className="stats">
-                <div>
-                  <b>0 → 1</b>
-                  <span>frontend</span>
-                </div>
-                <div>
-                  <b>1000s</b>
-                  <span>nodes / edges</span>
-                </div>
-                <div>
-                  <b>~30%</b>
-                  <span>faster renders</span>
-                </div>
-              </div>
-              <div className="pill-row">
-                <span>React</span>
-                <span>TypeScript</span>
-                <span>D3.js</span>
-                <span>React Flow</span>
-              </div>
-              <a href="https://singulr.ai/" target="_blank" rel="noreferrer">
-                Explore SingulrAI <MoveUpRight size={15} />
-              </a>
-            </div>
-          </article>
-
-          <figure className="quote" data-reveal>
-            <blockquote>
-              Bhavan joined Singulr AI as founding front end engineer and worked single handedly to develop the
-              foundations of UI from grounds up. He thrives in a fast paced startup environment and delivers features at
-              speed of light. He doesn&apos;t compromise on quality and scale even under high pressure environment to
-              keep the backlog under control. He did initial hiring and ramped up the team to lay the right foundation of
-              the product. It was a pleasure working with him.
-            </blockquote>
-            <figcaption>
-              <b>Rohit Reja</b>
-              <span>Co-Founder, Vyomex Labs · colleague at Spotnana and SingulrAI</span>
-            </figcaption>
-          </figure>
-
-          <section className="product-archive" aria-labelledby="product-archive-title" data-reveal>
-            <div className="archive-head">
-              <div>
-                <div className="archive-kicker">PRODUCT ARCHIVE</div>
-                <h3 id="product-archive-title">The screens behind the résumé.</h3>
-              </div>
-              <p>Public product screens from the companies I built with, paired with the part I owned. Historical references are labeled as public screens; the contribution story is mine.</p>
-            </div>
-            <div className="archive-grid">
-              {productReferences.map((product, index) => (
-                <article className="archive-card" key={product.company} data-reveal>
-                  <a className="archive-media" href={product.href || undefined} target="_blank" rel="noreferrer" aria-label={product.href ? `Open ${product.company} public product reference` : undefined}>
-                    <img src={product.image} alt={product.imageAlt} loading="lazy" />
-                    <span>{product.imageCaption}</span>
-                  </a>
-                  <div className="archive-body">
-                    <div className="archive-top">
-                      <span>{String(index + 3).padStart(2, '0')}</span>
-                      <small>{product.period}</small>
-                    </div>
-                    <div className="archive-company">{product.company}</div>
-                    <h4>{product.title}</h4>
-                    <p>{product.description}</p>
-                    <div className="archive-tags">
-                      {product.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                    </div>
-                    {product.href ? (
-                      <a href={product.href} target="_blank" rel="noreferrer">{product.linkLabel} <MoveUpRight size={14} /></a>
-                    ) : (
-                      <span className="archive-private">Private / portfolio evidence</span>
-                    )}
+                <div className="timeline-card">
+                  <div className="timeline-media">
+                    <ImageCarousel images={project.images} />
                   </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <div className="small-grid">
-            <article data-reveal>
-              <div className="mini-num">03</div>
-              <h3>An agent, inside other people’s sites</h3>
-              <p>
-                Staff frontend for an embedded AI agent. Blocks-based composition, an admin for non-engineers, and the
-                product call on what the agent was allowed to do — not only how it rendered.
-              </p>
-              <span className="ghost">BREAKOUT · 2025</span>
-            </article>
-            <article data-reveal data-delay="1">
-              <div className="mini-num">04</div>
-              <h3>A CRM, moved without a rewrite-for-purity</h3>
-              <p>
-                Led a ~35-page Angular CRM to React + TypeScript. Bundle down ~30%, LCP from ~4.5s to ~2.5s. A thousand
-                B2B clients landed on the new stack with production still up.
-              </p>
-              <span className="ghost">PUSHENGAGE · 2019</span>
-            </article>
-            <article data-reveal>
-              <div className="mini-num">05</div>
-              <h3>Live social and sales surfaces</h3>
-              <p>
-                Real-time React UIs for social monitoring and engagement at Freshworks, plus internal NLP tagging tools
-                used to train and review models.
-              </p>
-              <span className="ghost">FRESHWORKS · 2016</span>
-            </article>
-            <article data-reveal data-delay="1">
-              <div className="mini-num">06</div>
-              <h3>Styles that could survive a tax season</h3>
-              <p>
-                Refactored a large ClearTax UI into SCSS utilities, then built the early ClearSave React surface while
-                the product was still finding its shape.
-              </p>
-              <span className="ghost">CLEARTAX · 2015</span>
-            </article>
-            <article data-reveal>
-              <div className="mini-num">07</div>
-              <h3>From the early days</h3>
-              <p>
-                Third engineer at OYO. Built the central reservation system and the first consumer booking flow — search,
-                listings, checkout — while the company was still becoming a company.
-              </p>
-              <span className="ghost">OYO ROOMS · 2014</span>
-            </article>
-            <article data-reveal data-delay="1">
-              <div className="mini-num">08</div>
-              <h3>Whoever would hire a student who could ship</h3>
-              <p>
-                Client frontend out of Tirupati through the last year at VIT and after. Custom work until a company
-                hired the same person full-time.
-              </p>
-              <span className="ghost">FREELANCE · 2011</span>
-            </article>
+                  <div className="timeline-info">
+                    <div className="timeline-meta">
+                      <span>{project.period}</span>
+                      <span>{project.company}</span>
+                    </div>
+                    <div className="feature-role">{project.role}</div>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="timeline-label">TECH / SURFACES</div>
+                    <div className="pill-row">
+                      {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -1073,18 +875,9 @@ function App() {
               itself. The through-line is systems other people can keep.
             </p>
           </div>
-          <div className="career">
-            {career.map((row, i) => (
-              <div className={row[4] ? 'career-row featured' : 'career-row'} key={row[1]} data-reveal>
-                <span className="year">{row[0]}</span>
-                <div>
-                  <small>{row[1]}</small>
-                  <h3>{row[2]}</h3>
-                  <p>{row[3]}</p>
-                </div>
-                <span className="row-no">{String(i + 1).padStart(2, '0')}</span>
-              </div>
-            ))}
+          <div className="story-proof" data-reveal>
+            <span>THE THROUGH-LINE</span>
+            <p>The timeline above is the evidence. The progression is from shipping interfaces to owning frontend systems, product constraints, hiring, and technical judgment.</p>
           </div>
           <div className="education" data-reveal>
             <span className="year">2008—2012</span>
