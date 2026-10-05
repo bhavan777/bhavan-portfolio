@@ -431,48 +431,109 @@ function PortraitCarousel() {
 }
 
 
+function ImageLightbox({
+  images,
+  active,
+  onClose,
+  onChange,
+}: {
+  images: CarouselImage[];
+  active: number;
+  onClose: () => void;
+  onChange: (index: number) => void;
+}) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+      if (images.length > 1 && event.key === 'ArrowRight') onChange((active + 1) % images.length);
+      if (images.length > 1 && event.key === 'ArrowLeft') onChange((active - 1 + images.length) % images.length);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [active, images.length, onChange, onClose]);
+
+  if (!images.length) return null;
+  const [src, alt] = images[active];
+
+  return (
+    <div className="image-lightbox" role="dialog" aria-modal="true" aria-label={alt} onMouseDown={(event) => {
+      if (event.target === event.currentTarget) onClose();
+    }}>
+      <button type="button" className="lightbox-close" onClick={onClose} aria-label="Close image">×</button>
+      <div className="lightbox-content">
+        <img src={src} alt={alt} />
+        <div className="lightbox-footer">
+          <span>{alt}</span>
+          {images.length > 1 && (
+            <div className="lightbox-controls">
+              <button type="button" onClick={() => onChange((active - 1 + images.length) % images.length)} aria-label="Previous image">←</button>
+              <span>{active + 1} / {images.length}</span>
+              <button type="button" onClick={() => onChange((active + 1) % images.length)} aria-label="Next image">→</button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ImageCarousel({images}: {images: CarouselImage[]}) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
-    if (images.length < 2 || paused || prefersReducedMotion()) return;
+    if (images.length < 2 || paused || lightboxOpen || prefersReducedMotion()) return;
     const id = window.setInterval(() => setActive((current) => (current + 1) % images.length), 4500);
     return () => window.clearInterval(id);
-  }, [images.length, paused]);
+  }, [images.length, paused, lightboxOpen]);
 
   if (!images.length) {
-    return (
-      <div className="timeline-text-panel">
-        <span>TEXT-ONLY CASE STUDY</span>
-        <strong>Private / no public product screen</strong>
-        <p>Contribution details are shown without exposing confidential or unverifiable product imagery.</p>
-      </div>
-    );
+    return <div className="timeline-media-placeholder" aria-hidden="true"><span /></div>;
   }
 
   const [src, alt] = images[active];
+
   return (
-    <div className="image-carousel" role="region" aria-roledescription="carousel" aria-label={alt}
-      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
-      <img src={src} alt={alt} loading="lazy"
-        onError={() => setActive((current) => images.length > 1 ? (current + 1) % images.length : current)} />
-      {images.length > 1 && (
-        <div className="carousel-controls">
-          <button type="button" onClick={() => setActive((current) => (current - 1 + images.length) % images.length)} aria-label="Previous image">←</button>
-          <div className="carousel-dots" role="tablist" aria-label="Choose image">
-            {images.map(([, label], index) => (
-              <button key={label} type="button" role="tab" aria-selected={index === active}
-                aria-label={`Show image ${index + 1}: ${label}`} className={index === active ? 'is-active' : ''}
-                onClick={() => setActive(index)} />
-            ))}
+    <>
+      <button
+        type="button"
+        className="image-carousel"
+        aria-label={`Open ${alt}`}
+        onClick={() => setLightboxOpen(true)}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+      >
+        <img src={src} alt={alt} loading="lazy"
+          onError={() => setActive((current) => images.length > 1 ? (current + 1) % images.length : current)} />
+        <span className="carousel-open-hint">VIEW</span>
+        {images.length > 1 && (
+          <div className="carousel-controls" onClick={(event) => event.stopPropagation()}>
+            <span className="carousel-count">{active + 1} / {images.length}</span>
+            <div className="carousel-dots" role="tablist" aria-label="Choose image">
+              {images.map(([, label], index) => (
+                <span key={label} role="tab" aria-selected={index === active} aria-label={`Show image ${index + 1}: ${label}`} className={index === active ? 'is-active' : ''} />
+              ))}
+            </div>
           </div>
-          <button type="button" onClick={() => setActive((current) => (current + 1) % images.length)} aria-label="Next image">→</button>
-        </div>
+        )}
+      </button>
+      {lightboxOpen && (
+        <ImageLightbox
+          images={images}
+          active={active}
+          onClose={() => setLightboxOpen(false)}
+          onChange={setActive}
+        />
       )}
-      <span className="carousel-caption">{alt}</span>
-    </div>
+    </>
   );
 }
 
