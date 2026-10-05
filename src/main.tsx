@@ -24,10 +24,10 @@ const resumeHref = '/Bhavan_Kuchibhotla_Resume.pdf';
 type CarouselImage = [string, string];
 
 const breakoutImages: CarouselImage[] = [
-  ['/images/breakout-01.webp', 'Breakout embedded agent — booking form'],
-  ['/images/breakout-02.webp', 'Breakout product tour and visitor dashboard'],
-  ['/images/breakout-03.webp', 'Breakout meeting scheduling flow'],
-  ['/images/breakout-04.webp', 'Breakout agent conversation and scheduling flow'],
+  ['/images/breakout-01.jpg', 'Breakout embedded agent — booking form'],
+  ['/images/breakout-02.jpg', 'Breakout product tour and visitor dashboard'],
+  ['/images/breakout-03.jpg', 'Breakout meeting scheduling flow'],
+  ['/images/breakout-04.jpg', 'Breakout agent conversation and scheduling flow'],
 ];
 const singulrImages: CarouselImage[] = [
   ['https://cdn.prod.website-files.com/68c7c6fc5d08d3aa30556cf2/68c81f71e0835062c5696090_control%20pane%20-main-img.webp', 'SingulrAI control plane dashboard'],
